@@ -1,0 +1,79 @@
+█ 移除背景
+  https://github.com/YenCheChangGoogle/backgroundremover.git
+  
+  需要使用管理者身分執行
+  
+  刪除虛擬環境
+  conda env remove --name backgroundremover
+  
+  建立虛擬環境
+  conda create -n backgroundremover python=3.7
+  conda activate backgroundremover
+  
+  pip install -r requirements.txt
+  pip install backgroundremover
+  
+  查看版本
+  pip show backgroundremover
+  
+  自動下載模型
+  執行時 會自動檢查有無需要的模組 若無 就會自動去下載 放置到使用者目錄 例如: C:\Users\yench\.u2net\u2net.pth
+  執行時 會自動檢查有無需要的模組 若無 就會自動去下載 放置到使用者目錄 例如: C:\Users\yench\.u2net\u2net_human_seg.pth
+  或
+  手工下載模型
+  下載u2net模型(檔案 u2net.pth)
+  百度網盤的下載網址: https://pan.baidu.com/share/init?surl=WjwyEwDiaUjBbx_QxcXBwQ 提取碼: pf9k
+  或
+  Googledrive的下載網址: https://drive.google.com/file/d/1ao1ovG1Qtx4b7EoskHXmi2E9rp5CHLcZ/view
+  下載檔案放置到伺服器使用者的home目錄下的 .u2net 目錄下, 例如: C:\Users\yench\.u2net\u2net.pth
+  
+  範例
+  檢測效果
+  不指定模組
+  backgroundremover -i "C:/GIT/github/backgroundremover.git/YenCheChang.jpg" -o "C:/GIT/github/backgroundremover.git/YenCheChang.png"
+  
+  範例
+  指定模組
+  backgroundremover -i "C:/GIT/github/backgroundremover.git/YenCheChang.jpg" -m u2net_human_seg -o "C:/GIT/github/backgroundremover.git/YenCheChang.png"
+  
+  範例
+  python -m backgroundremover.cmd.cli -i "DEMO.mp4" -mk -o "DEMO.mov"
+  或
+  python -m backgroundremover.cmd.cli -i "DEMO.jpg" -o "DEMO.png"
+  或
+  backgroundremover -i "DEMO.jpg" -o "DEMO.png"
+  或
+  加入alpha參數得到更好的效果
+  backgroundremover -i "DEMO.jpg" -a -ae 15 -o "DEMO.png"
+  或
+  更改 u2netp、u2net 或 u2net_ human_seg 之間不同背景移除方法的模型
+  backgroundremover -i "DEMO.jpg" -m "u2net_human_seg" -o "DEMO.png"
+  或
+  使用透明的背景的動畫
+  backgroundremover -i "DEMO.mp44" -tv -o "DEMO.mov"
+  或
+  從本地影片中刪除背景並將其覆蓋在其他影片上
+  backgroundremover -i "DEMO.mp4" -tov "DEMO2.mp4" -o "DEMO.mov"
+  或
+  從本地影片中刪除背景並將其覆蓋在圖像上
+  backgroundremover -i "DEMO.mp4" -toi "DEMO2.mp4" -o "DEMO.gif"
+  或
+  去除影片背景並製作透明 gif
+  backgroundremover -i "DEMO.mp4" -tg -o "DEMO.gif"
+  或
+  製作遮罩關鍵檔案（綠幕覆蓋）
+  backgroundremover -i "DEMO.mp4" -mk -o "DEMO.matte.mp4"
+  或
+  變更影片的幀速率（預設為 30）
+  設定影片的總幀數（預設為-1, 即從整個影片中刪除背景）
+  backgroundremover -i "/path/to/video.mp4" -fr 30 -tv -o "output.mov"
+  backgroundremover -i "/path/to/video.mp4" -fl 150 -tv -o "output.mov"
+  或
+  變更影片的 GPU 批次大小（預設為 1）
+  backgroundremover -i "/path/to/video.mp4" -gb 4 -tv -o "output.mov"
+  或
+  更改處理影片的工作人員數量（預設為 1）
+  backgroundremover -i "/path/to/video.mp4" -wn 4 -tv -o "output.mov"
+  或
+  更改 u2netp、u2net 或 u2net_ human_seg 之間不同背景移除方法的模型, 並將幀數限制為 150
+  backgroundremover -i "/path/to/video.mp4" -m "u2net_human_seg" -fl 150 -tv -o "output.mov"
